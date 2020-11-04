@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 
 export const AddContact = () => {
+	const { store, actions } = useContext(Context);
 	return (
 		<div className="container">
 			<div>
@@ -23,8 +25,8 @@ export const AddContact = () => {
 						<label>Address</label>
 						<input type="text" className="form-control" placeholder="Enter address" />
 					</div>
-					<button type="button" className="btn btn-primary form-control">
-						save
+					<button type="button" className="btn btn-primary form-control" onClick>
+						Save
 					</button>
 					<Link className="mt-3 w-100 text-center" to="/">
 						or get back to contacts
