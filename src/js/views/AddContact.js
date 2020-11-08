@@ -26,10 +26,10 @@ export const AddContact = () => {
 				<h1 className="text-center mt-5">Add a new contact</h1>
 				<form
 					onSubmit={event => {
-						event.preventDefault();
 						actions.addContact(fillingContact());
-						console.log(store.contacts);
+						event.preventDefault();
 					}}>
+					{console.log(store.contacts)}
 					<div className="form-group">
 						<label>Full Name</label>
 						<input type="text" className="form-control" placeholder="Full Name" id="name" value={null} />
