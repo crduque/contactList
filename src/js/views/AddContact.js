@@ -63,11 +63,17 @@ export const AddContact = () => {
 							value={null}
 						/>
 					</div>
-					{/* <Link to="/"> */}
-					<button type="submit" className="btn btn-primary form-control">
-						Save
-					</button>
-					{/* </Link> */}
+					<Link to="/">
+						<button
+							type="submit"
+							className="btn btn-primary form-control"
+							onClick={() => {
+								actions.addContact(fillingContact());
+								event.preventDefault();
+							}}>
+							Save
+						</button>
+					</Link>
 					<Link className="mt-3 w-100 text-center" to="/">
 						or get back to contacts
 					</Link>

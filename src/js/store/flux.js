@@ -39,10 +39,10 @@ const getState = ({ getStore, setStore, getActions }) => {
 					})
 					.then(answerUpload => {
 						getActions().getContacts();
-						console.log("Success: ", JSON.stringify(answerUpload));
+						console.log("Success: Contact created");
 					})
 					.catch(error => {
-						console.log("Error status: ", error);
+						console.log("Creating contact, error status: ", error);
 					});
 			},
 			deleteContact: () => {
@@ -57,11 +57,10 @@ const getState = ({ getStore, setStore, getActions }) => {
 					})
 					.then(answerUpload => {
 						getActions().getContacts();
-						console.log(getStore().contacts);
-						// console.log("Success: ", JSON.stringify(answerUpload));
+						console.log("Success: Contact deleted");
 					})
 					.catch(error => {
-						console.log("Error status: ", error);
+						console.log("Deleting contact, error status: ", error);
 					});
 			}
 		}
