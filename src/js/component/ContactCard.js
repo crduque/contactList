@@ -6,10 +6,11 @@ import { Context } from "../store/appContext.js";
 
 export const ContactCard = props => {
 	const { store, actions } = useContext(Context);
+	// let listItemId = document.querySelector("#" + eachContact.id);
 
 	const contactCardReturned = store.contacts.map((eachContact, index) => {
 		return (
-			<li className="list-group-item" key={index}>
+			<li className="list-group-item" key={index} id={eachContact.id}>
 				<div className="row w-100">
 					<div className="col-12 col-sm-6 col-md-3 px-0">
 						<img
@@ -23,7 +24,12 @@ export const ContactCard = props => {
 							<button className="btn">
 								<i className="fas fa-pencil-alt mr-3" />
 							</button>
-							<button className="btn" onClick={() => props.onDelete()}>
+							<button
+								className="btn"
+								onClick={() => {
+									props.onDelete();
+									store.idToDelete = eachContact.id;
+								}}>
 								<i className="fas fa-trash-alt" />
 							</button>
 						</div>

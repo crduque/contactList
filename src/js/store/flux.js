@@ -2,7 +2,8 @@ const getState = ({ getStore, setStore, getActions }) => {
 	return {
 		store: {
 			//Your data structures, A.K.A Entities
-			contacts: []
+			contacts: [],
+			idToDelete: null
 		},
 		actions: {
 			//(Arrow) Functions that update the Store
@@ -44,21 +45,25 @@ const getState = ({ getStore, setStore, getActions }) => {
 						console.log("Error status: ", error);
 					});
 			},
-			// fillingContact: () => {
-			// 	let nameValue = document.querySelector("#name").value;
-			// 	let emailValue = document.querySelector("#email").value;
-			// 	let addressValue = document.querySelector("#address").value;
-			// 	let phoneValue = document.querySelector("#phone").value;
-
-			// 	return {
-			// 		full_name: nameValue,
-			// 		email: emailValue,
-			// 		agenda_slug: "cris_agenda",
-			// 		address: addressValue,
-			// 		phone: phoneValue
-			// 	};
-			// },
-			deleteContact: () => {}
+			deleteContact: () => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + getStore().idToDelete, {
+					method: "DELETE"
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error(response.status);
+						}
+						return response.json();
+					})
+					.then(answerUpload => {
+						getActions().getContacts();
+						console.log(getStore().contacts);
+						// console.log("Success: ", JSON.stringify(answerUpload));
+					})
+					.catch(error => {
+						console.log("Error status: ", error);
+					});
+			}
 		}
 	};
 };

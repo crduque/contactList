@@ -29,7 +29,6 @@ export const AddContact = () => {
 						actions.addContact(fillingContact());
 						event.preventDefault();
 					}}>
-					{console.log(store.contacts)}
 					<div className="form-group">
 						<label>Full Name</label>
 						<input type="text" className="form-control" placeholder="Full Name" id="name" value={null} />
