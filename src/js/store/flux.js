@@ -3,7 +3,9 @@ const getState = ({ getStore, setStore, getActions }) => {
 		store: {
 			//Your data structures, A.K.A Entities
 			contacts: [],
-			idToDelete: null
+			idToDelete: null,
+			idToEdit: null,
+			indexToEdit: null
 		},
 		actions: {
 			//(Arrow) Functions that update the Store
@@ -37,7 +39,7 @@ const getState = ({ getStore, setStore, getActions }) => {
 						}
 						return response.json();
 					})
-					.then(answerUpload => {
+					.then(() => {
 						getActions().getContacts();
 						console.log("Success: Contact created");
 					})
@@ -55,12 +57,34 @@ const getState = ({ getStore, setStore, getActions }) => {
 						}
 						return response.json();
 					})
-					.then(answerUpload => {
+					.then(() => {
 						getActions().getContacts();
 						console.log("Success: Contact deleted");
 					})
 					.catch(error => {
 						console.log("Deleting contact, error status: ", error);
+					});
+			},
+			editContact: object => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + getStore().idToEdit, {
+					method: "PUT",
+					body: JSON.stringify(object),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error(response.status);
+						}
+						return response.json();
+					})
+					.then(() => {
+						getActions().getContacts();
+						console.log("Success: Contact edited");
+					})
+					.catch(error => {
+						console.log("Editing contact, error status: ", error);
 					});
 			}
 		}

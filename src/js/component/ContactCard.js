@@ -3,10 +3,10 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import MikePhoto from "../../img/m101.jpg";
 import { Context } from "../store/appContext.js";
+import { Link } from "react-router-dom";
 
 export const ContactCard = props => {
 	const { store, actions } = useContext(Context);
-	// let listItemId = document.querySelector("#" + eachContact.id);
 
 	const contactCardReturned = store.contacts.map((eachContact, index) => {
 		return (
@@ -21,9 +21,16 @@ export const ContactCard = props => {
 					</div>
 					<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 						<div className=" float-right">
-							<button className="btn">
-								<i className="fas fa-pencil-alt mr-3" />
-							</button>
+							<Link to="/edit">
+								<button
+									className="btn"
+									onClick={() => {
+										store.idToEdit = eachContact.id;
+										store.indexToEdit = index;
+									}}>
+									<i className="fas fa-pencil-alt mr-3" />
+								</button>
+							</Link>
 							<button
 								className="btn"
 								onClick={() => {
