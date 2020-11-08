@@ -5,9 +5,6 @@ import MikePhoto from "../../img/m101.jpg";
 import { Context } from "../store/appContext.js";
 
 export const ContactCard = props => {
-	const [state, setState] = useState({
-		//initialize state here
-	});
 	const { store, actions } = useContext(Context);
 
 	const contactCardReturned = store.contacts.map((eachContact, index) => {

@@ -17,24 +17,21 @@ const getState = ({ getStore, setStore }) => {
 					})
 					.then(jsonContacts => {
 						setStore({ contacts: jsonContacts });
-						console.log(getStore().contacts);
 					})
 					.catch(error => {
 						console.log("Error status: ", error);
 					});
 			},
-			addContact: () => {
+			addContact: object => {
 				fetch("https://assets.breatheco.de/apis/fake/contact/", {
-					method: "POST"
+					method: "POST",
+					body: JSON.stringify(object)
 				})
 					.then(response => {
 						if (!response.ok) {
 							throw new Error(response.status);
 						}
 						return response.json();
-					})
-					.then(jsonContacts => {
-						setStore({ contacts: jsonContacts });
 					})
 					.catch(error => {
 						console.log("Error status: ", error);
